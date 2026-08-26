@@ -1,0 +1,20 @@
+---
+const links = [
+  { href: "mailto:manoatelier554@gmail.com", label: "Email" },
+  { href: "https://github.com/t-bfny", label: "GitHub" },
+  { href: "https://x.com/yekiponk", label: "X" },
+];
+---
+
+<footer class="border-t border-[var(--color-border)] mt-24">
+  <div class="max-w-[var(--container-max)] mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between gap-4 text-sm text-[var(--color-fg-muted)]">
+    <span>&copy; {new Date().getFullYear()} yekipo.tech. All rights reserved.</span>
+    <div class="flex gap-6 sm:pr-28">
+      {links.map((link) => (
+        <a href={link.href} class="transition-colors hover:text-[var(--color-fg)]">
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</footer>

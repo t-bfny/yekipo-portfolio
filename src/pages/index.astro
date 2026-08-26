@@ -1,17 +1,69 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import WorkCard from "../components/WorkCard.astro";
+import { works } from "../data/works";
 
+const featured = works.filter((w) => w.featured);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home">
+  <section class="relative overflow-hidden min-h-[70vh] flex items-end">
+    <video
+      class="absolute inset-0 w-full h-full object-cover"
+      src="/videos/on_the_cliff.webm"
+      autoplay
+      muted
+      loop
+      playsinline
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-[var(--color-bg)]/40 to-[var(--color-bg)]/10">
+    </div>
+
+    <div class="relative max-w-[var(--container-max)] mx-auto px-6 pb-16 pt-24 w-full">
+      <p class="text-[var(--color-accent)] font-display text-sm tracking-widest uppercase mb-4">
+        Builder
+      </p>
+      <h1 class="font-display font-bold text-4xl sm:text-6xl leading-tight max-w-3xl">
+        To the creator who crosses multimedia.
+      </h1>
+      <p class="mt-6 text-[var(--color-fg-muted)] max-w-xl leading-relaxed">
+        Testing ideas while continuously building small tools and products.
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-[var(--container-max)] mx-auto px-6 pb-24">
+    <div class="flex items-baseline justify-between mb-8">
+      <h2 class="font-display font-bold text-2xl">Selected Works</h2>
+      <a href="/works" class="text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">
+        View all &rarr;
+      </a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {featured.map((work) => (
+        <WorkCard work={work} />
+      ))}
+    </div>
+  </section>
+
+  <section class="max-w-[var(--container-max)] mx-auto px-6 pb-24">
+    <h2 class="font-display font-bold text-2xl mb-8">About</h2>
+    <div class="flex flex-col sm:flex-row gap-8 items-start">
+      <img
+        src="/profile/comai_circle.png"
+        alt="Profile"
+        class="w-32 h-32 rounded-full border border-[var(--color-border)] shrink-0"
+      />
+      <div class="max-w-2xl">
+        <p class="text-[var(--color-fg-muted)] leading-relaxed mb-4">
+          Building products with my own hands is what motivates me most.
+        </p>
+        <p class="text-[var(--color-fg-muted)] leading-relaxed">
+          I researched optical networks and virtualization technology at a
+          university in Japan. Now, I'm also interested in video editing,
+          technical writing, 3D modeling, AI research, and more.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

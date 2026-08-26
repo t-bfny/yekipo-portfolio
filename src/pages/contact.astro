@@ -1,0 +1,34 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// 例: このページだけアクセントカラーを変える(ページごとにテーマを持たせる仕組みのデモ)
+const accent = "#ffb84c";
+---
+
+<Layout title="Contact" accent={accent}>
+  <div class="w-full h-40 sm:h-56 overflow-hidden">
+    <img
+      src="/works/works-hero.png"
+      alt=""
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  <section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24">
+    <h1 class="font-display font-bold text-4xl mb-6">Contact</h1>
+    <p class="text-[var(--color-fg-muted)] max-w-xl leading-relaxed mb-10">
+      Feel free to reach out.
+    </p>
+    <div class="flex flex-col gap-3">
+      <a href="mailto:manoatelier554@gmail.com" class="text-[var(--color-accent)] hover:underline">
+        manoatelier554@gmail.com
+      </a>
+      <a href="https://github.com/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">
+        GitHub
+      </a>
+      <a href="https://x.com/yekiponk" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">
+        X
+      </a>
+    </div>
+  </section>
+</Layout>

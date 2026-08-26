@@ -1,0 +1,28 @@
+---
+const { pathname } = Astro.url;
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/works", label: "Works" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<header class="border-b border-[var(--color-border)]">
+  <div class="max-w-[var(--container-max)] mx-auto flex items-center justify-between px-6 py-5">
+    <a href="/" class="font-display font-bold text-lg tracking-tight">yekipo</a>
+    <nav class="flex gap-6 text-sm text-[var(--color-fg-muted)]">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "transition-colors hover:text-[var(--color-fg)]",
+            pathname === link.href && "text-[var(--color-fg)]",
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

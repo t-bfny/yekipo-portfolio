@@ -1,0 +1,39 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  accent?: string; // ページ固有のアクセントカラー(未指定ならグローバルの --color-accent を使用)
+}
+
+const { title, description = "yekipo's portfolio", accent } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} | yekipo</title>
+  </head>
+  <body style={accent ? `--color-accent: ${accent}` : undefined}>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <a
+      href="https://buymeacoffee.com/yekipo"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="fixed bottom-5 right-5 z-50 text-sm text-[var(--color-fg-muted)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded-full px-4 py-2 transition-colors hover:text-[var(--color-fg)] hover:border-[var(--color-accent)]"
+    >
+      Support
+    </a>
+  </body>
+</html>

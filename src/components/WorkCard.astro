@@ -1,0 +1,30 @@
+---
+import type { Work } from "../data/works";
+
+interface Props {
+  work: Work;
+  showYear?: boolean;
+}
+
+const { work, showYear = false } = Astro.props;
+---
+
+<a
+  href={`/works/${work.slug}`}
+  class="block border border-[var(--color-border)] rounded-lg p-6 bg-[var(--color-surface)] transition-colors hover:border-[var(--color-accent)]"
+>
+  <div class="flex items-baseline justify-between mb-2">
+    <h3 class="font-display font-medium text-lg">{work.title}</h3>
+    {showYear && <span class="text-xs text-[var(--color-fg-muted)]">{work.year}</span>}
+  </div>
+  <p class="text-sm text-[var(--color-fg-muted)] leading-relaxed mb-4">
+    {work.description}
+  </p>
+  <div class="flex flex-wrap gap-2">
+    {work.tags.map((tag) => (
+      <span class="text-xs text-[var(--color-fg-muted)] border border-[var(--color-border)] rounded-full px-2 py-0.5">
+        {tag}
+      </span>
+    ))}
+  </div>
+</a>

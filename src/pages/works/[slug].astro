@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { works } from "../../data/works";
+
+export function getStaticPaths() {
+  return works.map((work) => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
+}
+
+const { work } = Astro.props;
+---
+
+<Layout title={work.title}>
+  <section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24">
+    <a
+      href="/works"
+      class="inline-block text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors mb-8"
+    >
+      &larr; Back to Works
+    </a>
+
+    {work.image ? (
+      <img
+        src={work.image}
+        alt={work.title}
+        class="w-full aspect-video object-cover rounded-lg border border-[var(--color-border)] mb-10"
+      />
+    ) : (
+      // TODO: public/works/{slug}.jpg を用意したら image フィールドに設定してください
+      <div class="w-full aspect-video rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] flex items-center justify-center mb-10">
+        <span class="font-display text-[var(--color-fg-muted)] text-sm">{work.title}</span>
+      </div>
+    )}
+
+    <div class="flex items-baseline justify-between gap-4 mb-4">
+      <h1 class="font-display font-bold text-3xl sm:text-4xl">{work.title}</h1>
+      <span class="text-sm text-[var(--color-fg-muted)] whitespace-nowrap">{work.year}</span>
+    </div>
+
+    <p class="text-[var(--color-fg-muted)] max-w-2xl leading-relaxed mb-6">
+      {work.description}
+    </p>
+
+    <div class="flex flex-wrap gap-2 mb-10">
+      {work.tags.map((tag) => (
+        <span class="text-xs text-[var(--color-fg-muted)] border border-[var(--color-border)] rounded-full px-2 py-0.5">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    {work.link && (
+      <a
+        href={work.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block text-[var(--color-accent)] hover:underline"
+      >
+        Visit &nearr;
+      </a>
+    )}
+  </section>
+</Layout>
