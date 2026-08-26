@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import WorkCard from "../components/WorkCard.astro";
 import { works } from "../data/works";
 
-const featured = works.filter((w) => w.featured);
+const featured = works.filter((w) => w.featured).slice(0, 6);
 ---
 
 <Layout title="Home">
