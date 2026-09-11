@@ -66,4 +66,14 @@ export const works: Work[] = [
     image: "/works/yekipod.png",
     featured: true,
   },
+  {
+    slug: "deadline-detector",
+    title: "Deadline Detector",
+    description: "A gentle deadline management widget for Windows 11.",
+    tags: ["Windows", "Productivity"],
+    year: "2026",
+    link: "https://atelier-mano.booth.pm/items/8824996",
+    image: "/works/deadline-detector.png",
+    featured: true,
+  },
 ];
