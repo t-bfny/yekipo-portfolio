@@ -1,0 +1,64 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Privacy Policy"
+  description="Privacy policy for yekipo's desktop tools, including Deadline Detector's Google Calendar integration."
+>
+  <section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24">
+    <h1 class="font-display font-bold text-4xl mb-4">Privacy Policy</h1>
+    <p class="text-sm text-[var(--color-fg-muted)] mb-10">Last updated: September 21, 2026</p>
+
+    <div class="max-w-2xl text-[var(--color-fg-muted)] leading-relaxed space-y-6">
+      <p>
+        The tools listed on this site are small, independently-made desktop apps. None of them
+        have a server — everything runs locally on your own machine. There is no analytics, no
+        tracking, and nothing is ever sent to me or to any third party.
+      </p>
+
+      <h2 class="font-display font-bold text-2xl text-[var(--color-fg)] mt-10 mb-3">
+        Deadline Detector &amp; Google Calendar
+      </h2>
+      <p>
+        Deadline Detector can optionally connect to your Google Calendar so your active deadlines
+        show up alongside the rest of your schedule. This is entirely opt-in — the app works fully
+        without it — and you can disconnect at any time from its menu.
+      </p>
+      <p>What this connection does:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li>
+          It requests the <code class="text-[var(--color-fg)]">calendar.events</code> scope only —
+          permission to create, update, and delete events, not to read your existing calendar or
+          any other Google data.
+        </li>
+        <li>
+          For each active (not-yet-completed) deadline, it creates one event on your primary
+          calendar with the task's name, due date/time, and its "next step" note if you set one.
+        </li>
+        <li>
+          Editing a deadline's due date updates that event; completing or deleting a deadline
+          removes it.
+        </li>
+        <li>
+          Disconnecting removes every event the app created and revokes its access to your Google
+          account — nothing is left behind.
+        </li>
+      </ul>
+      <p>
+        The Google account credentials used for this (an encrypted refresh token) are stored only
+        on your own computer, using your operating system's built-in encryption (Windows
+        Credential/DPAPI). They never leave your machine except to talk directly to Google's
+        Calendar API — I do not have a copy, and there is no server in between.
+      </p>
+
+      <h2 class="font-display font-bold text-2xl text-[var(--color-fg)] mt-10 mb-3">Contact</h2>
+      <p>
+        Questions about any of this? Reach me at
+        <a href="mailto:manoatelier554@gmail.com" class="text-[var(--color-accent)] hover:underline">
+          manoatelier554@gmail.com
+        </a>.
+      </p>
+    </div>
+  </section>
+</Layout>
