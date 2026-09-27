@@ -84,6 +84,7 @@ export const works: Work[] = [
     tags: ["Video Editing", "YouTube"],
     year: "2026",
     link: "https://www.youtube.com/channel/UCpBYJRyJ29FV-Ghc8qrfSXQ/videos",
+    image: "/works/Part30.png",
     featured: true,
   },
 ];
