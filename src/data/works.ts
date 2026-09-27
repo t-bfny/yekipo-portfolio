@@ -76,4 +76,14 @@ export const works: Work[] = [
     image: "/works/deadline-detector.png",
     featured: true,
   },
+  {
+    slug: "hineco-studio",
+    title: "hineco studio",
+    description:
+      "A B-tier game commentary channel, covering not just Japanese titles but overseas Steam games as well.",
+    tags: ["Video Editing", "YouTube"],
+    year: "2026",
+    link: "https://www.youtube.com/channel/UCpBYJRyJ29FV-Ghc8qrfSXQ/videos",
+    featured: true,
+  },
 ];
