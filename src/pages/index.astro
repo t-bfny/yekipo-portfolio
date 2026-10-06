@@ -4,6 +4,49 @@ import WorkCard from "../components/WorkCard.astro";
 import { works } from "../data/works";
 
 const featured = works.filter((w) => w.featured).slice(0, 6);
+
+const activities = [
+  { title: "Competed in ICTSC 2016" },
+  {
+    title: "Interop Tokyo 2017–2019, 2022–2023",
+    items: ["Exhibited 8K streaming technology over ultra-wideband networks"],
+  },
+  {
+    title: "Internet Week 2025",
+    items: ["Built the on-site event network"],
+  },
+  {
+    title: "Brand new note",
+    items: ["A blog for network and server engineers"],
+  },
+  {
+    title: "Atelier mano",
+    items: [
+      "Focused on AI, video editing, and 3D modeling",
+      "A blog supporting creators",
+    ],
+  },
+  {
+    title: "Portfolio — Yekipo tech",
+    items: ["Links to past work and social media"],
+  },
+  {
+    title: "Ran a YouTube channel",
+    items: [
+      "Earphone reviews (sponsored)",
+      "Automated live streaming server",
+      "Built multi-stream broadcasting infrastructure",
+    ],
+  },
+  {
+    title: "Ran a Discord server",
+    items: [
+      "Color Coordination exam study group (free)",
+      "A volunteer community for exam prep and discussing real-world applications of design",
+      "Won a Special Award at ICD 2024",
+    ],
+  },
+];
 ---
 
 <Layout title="Home">
@@ -63,6 +106,24 @@ const featured = works.filter((w) => w.featured).slice(0, 6);
           university in Japan. Now, I'm also interested in video editing,
           technical writing, 3D modeling, AI research, and more.
         </p>
+
+        <h3 class="font-display font-medium text-lg mt-10 mb-4">Activities</h3>
+        <ul class="flex flex-col gap-3">
+          {activities.map((activity) => (
+            <li>
+              <p class="text-[var(--color-fg)]">{activity.title}</p>
+              {activity.items && (
+                <ul class="mt-1 flex flex-col gap-0.5">
+                  {activity.items.map((item) => (
+                    <li class="text-sm text-[var(--color-fg-muted)] leading-relaxed pl-4 relative before:content-['–'] before:absolute before:left-0">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </section>
