@@ -1,0 +1,62 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const services = [
+  {
+    title: "Video Editing",
+    description:
+      "Editing for YouTube videos, game commentary, and short-form content — cuts, captions, color, and sound.",
+  },
+  {
+    title: "Writing",
+    description:
+      "Technical articles, blog posts, and documentation, written clearly with the reader in mind.",
+  },
+];
+---
+
+<Layout title="Services">
+  <div class="w-full h-40 sm:h-56 overflow-hidden">
+    <img
+      src="/works/works-hero.png"
+      alt=""
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  <section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24">
+    <h1 class="font-display font-bold text-4xl mb-4">Services</h1>
+    <p class="text-[var(--color-fg-muted)] max-w-xl leading-relaxed mb-12">
+      Direct booking for video editing and writing work.
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-6">
+      {services.map((service) => (
+        <div class="border border-[var(--color-border)] rounded-lg p-6 bg-[var(--color-surface)] flex flex-col gap-6">
+          <div>
+            <h2 class="font-display font-medium text-lg mb-2">{service.title}</h2>
+            <p class="text-sm text-[var(--color-fg-muted)] leading-relaxed">
+              {service.description}
+            </p>
+          </div>
+
+          <div class="border border-dashed border-[var(--color-border)] rounded-lg p-4">
+            <p class="text-xs text-[var(--color-fg-muted)] tracking-wide uppercase mb-1">
+              Pricing
+            </p>
+            <p class="text-sm text-[var(--color-fg-muted)]">
+              Under construction — rates will be posted here soon.
+            </p>
+          </div>
+
+          <a
+            href={`mailto:manoatelier554@gmail.com?subject=${encodeURIComponent(`${service.title} Request`)}`}
+            class="text-sm text-[var(--color-accent)] hover:underline"
+          >
+            Request via Email &rarr;
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
