@@ -1,29 +1,62 @@
 ---
+import T from "./T.astro";
+
 const { pathname } = Astro.url;
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/works", label: "Works" },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", en: "Home", ja: "ホーム" },
+  { href: "/works", en: "Works", ja: "制作物" },
+  { href: "/services", en: "Services", ja: "サービス" },
+  { href: "/contact", en: "Contact", ja: "お問い合わせ" },
 ];
 ---
 
 <header class="border-b border-[var(--color-border)]">
   <div class="max-w-[var(--container-max)] mx-auto flex items-center justify-between px-6 py-5">
     <a href="/" class="font-display font-bold text-lg tracking-tight">yekipo</a>
-    <nav class="flex gap-6 text-sm text-[var(--color-fg-muted)]">
-      {links.map((link) => (
-        <a
-          href={link.href}
-          class:list={[
-            "transition-colors hover:text-[var(--color-fg)]",
-            pathname === link.href && "text-[var(--color-fg)]",
-          ]}
-        >
-          {link.label}
-        </a>
-      ))}
-    </nav>
+    <div class="flex items-center gap-6">
+      <nav class="flex gap-6 text-sm text-[var(--color-fg-muted)]">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "transition-colors hover:text-[var(--color-fg)]",
+              pathname === link.href && "text-[var(--color-fg)]",
+            ]}
+          >
+            <T en={link.en} ja={link.ja} />
+          </a>
+        ))}
+      </nav>
+      <button
+        id="lang-switch"
+        type="button"
+        aria-label="Switch language"
+        class="text-xs text-[var(--color-fg-muted)] border border-[var(--color-border)] rounded-full px-3 py-1 transition-colors hover:text-[var(--color-fg)] hover:border-[var(--color-accent)]"
+      >
+        <span lang="en">日本語</span><span lang="ja">EN</span>
+      </button>
+    </div>
   </div>
 </header>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById("lang-switch");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var isJa = document.documentElement.getAttribute("data-lang") === "ja";
+      if (isJa) {
+        document.documentElement.removeAttribute("data-lang");
+        try {
+          localStorage.setItem("lang", "en");
+        } catch (e) {}
+      } else {
+        document.documentElement.setAttribute("data-lang", "ja");
+        try {
+          localStorage.setItem("lang", "ja");
+        } catch (e) {}
+      }
+    });
+  })();
+</script>

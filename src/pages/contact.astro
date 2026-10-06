@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import T from "../components/T.astro";
 
 // 例: このページだけアクセントカラーを変える(ページごとにテーマを持たせる仕組みのデモ)
 const accent = "#ffb84c";
@@ -15,15 +16,17 @@ const accent = "#ffb84c";
   </div>
 
   <section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24">
-    <h1 class="font-display font-bold text-4xl mb-6">Contact</h1>
+    <h1 class="font-display font-bold text-4xl mb-6">
+      <T en="Contact" ja="お問い合わせ" />
+    </h1>
     <p class="text-[var(--color-fg-muted)] max-w-xl leading-relaxed mb-10">
-      Feel free to reach out.
+      <T en="Feel free to reach out." ja="お気軽にご連絡ください。" />
     </p>
     <div class="flex flex-col gap-3">
       <a href="mailto:manoatelier554@gmail.com" class="text-[var(--color-accent)] hover:underline">
         manoatelier554@gmail.com
       </a>
-      <a href="https://github.com/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">
+      <a href="https://github.com/t-bfny" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">
         GitHub
       </a>
       <a href="https://x.com/yekiponk" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">

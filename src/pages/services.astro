@@ -1,16 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import T from "../components/T.astro";
 
 const services = [
   {
     title: "Video Editing",
-    description:
-      "Editing for YouTube videos, game commentary, and short-form content — cuts, captions, color, and sound.",
+    titleJa: "動画編集",
+    description: {
+      en: "Editing for YouTube videos, game commentary, and short-form content — cuts, captions, color, and sound.",
+      ja: "YouTube動画やゲーム実況、ショート動画の編集を承ります。カット編集・字幕・カラー調整・音声調整まで対応。",
+    },
   },
   {
     title: "Writing",
-    description:
-      "Technical articles, blog posts, and documentation, written clearly with the reader in mind.",
+    titleJa: "ライティング",
+    description: {
+      en: "Technical articles, blog posts, and documentation, written clearly with the reader in mind.",
+      ja: "技術記事・ブログ・ドキュメントなど、読み手を意識した分かりやすい文章を執筆します。",
+    },
   },
 ];
 ---
@@ -25,27 +32,37 @@ const services = [
   </div>
 
   <section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24">
-    <h1 class="font-display font-bold text-4xl mb-4">Services</h1>
+    <h1 class="font-display font-bold text-4xl mb-4">
+      <T en="Services" ja="サービス" />
+    </h1>
     <p class="text-[var(--color-fg-muted)] max-w-xl leading-relaxed mb-12">
-      Direct booking for video editing and writing work.
+      <T
+        en="Direct booking for video editing and writing work."
+        ja="動画編集・ライティングのご依頼を直接受け付けています。"
+      />
     </p>
 
     <div class="grid sm:grid-cols-2 gap-6">
       {services.map((service) => (
         <div class="border border-[var(--color-border)] rounded-lg p-6 bg-[var(--color-surface)] flex flex-col gap-6">
           <div>
-            <h2 class="font-display font-medium text-lg mb-2">{service.title}</h2>
+            <h2 class="font-display font-medium text-lg mb-2">
+              <T en={service.title} ja={service.titleJa} />
+            </h2>
             <p class="text-sm text-[var(--color-fg-muted)] leading-relaxed">
-              {service.description}
+              <T en={service.description.en} ja={service.description.ja} />
             </p>
           </div>
 
           <div class="border border-dashed border-[var(--color-border)] rounded-lg p-4">
             <p class="text-xs text-[var(--color-fg-muted)] tracking-wide uppercase mb-1">
-              Pricing
+              <T en="Pricing" ja="料金" />
             </p>
             <p class="text-sm text-[var(--color-fg-muted)]">
-              Under construction — rates will be posted here soon.
+              <T
+                en="Under construction — rates will be posted here soon."
+                ja="準備中 — 近日公開予定です。"
+              />
             </p>
           </div>
 
@@ -53,7 +70,7 @@ const services = [
             href={`mailto:manoatelier554@gmail.com?subject=${encodeURIComponent(`${service.title} Request`)}`}
             class="text-sm text-[var(--color-accent)] hover:underline"
           >
-            Request via Email &rarr;
+            <T en="Request via Email" ja="メールで依頼する" /> &rarr;
           </a>
         </div>
       ))}

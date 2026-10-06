@@ -1,5 +1,6 @@
 ---
 import type { Work } from "../data/works";
+import T from "./T.astro";
 
 interface Props {
   work: Work;
@@ -18,7 +19,7 @@ const { work, showYear = false } = Astro.props;
     {showYear && <span class="text-xs text-[var(--color-fg-muted)]">{work.year}</span>}
   </div>
   <p class="text-sm text-[var(--color-fg-muted)] leading-relaxed mb-4">
-    {work.description}
+    <T en={work.description.en} ja={work.description.ja} />
   </p>
   <div class="flex flex-wrap gap-2">
     {work.tags.map((tag) => (

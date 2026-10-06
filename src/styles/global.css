@@ -8,7 +8,7 @@
 
 @theme {
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", "Hiragino Kaku Gothic ProN", "Yu Gothic", ui-sans-serif, system-ui, sans-serif;
 
   /* ベースはダーク。--color-accent はページ単位で上書きしてテーマを変える */
   --color-bg: #0a0a0a;
@@ -29,4 +29,12 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
+}
+
+/* 言語切り替え: <html data-lang="en|ja"> を script で切り替え、該当しない lang 属性の要素を隠す */
+:root:not([data-lang="ja"]) [lang="ja"] {
+  display: none;
+}
+:root[data-lang="ja"] [lang="en"] {
+  display: none;
 }

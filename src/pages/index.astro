@@ -1,45 +1,60 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import WorkCard from "../components/WorkCard.astro";
+import T from "../components/T.astro";
 import { works } from "../data/works";
 
 const featured = works.filter((w) => w.featured).slice(0, 6);
 
 const activities = [
-  { title: "Competed in ICTSC 2016" },
+  { en: "Competed in ICTSC 2016", ja: "ICTSC2016 出場" },
   {
-    title: "Interop Tokyo 2017–2019, 2022–2023",
-    items: ["Exhibited 8K streaming technology over ultra-wideband networks"],
-  },
-  {
-    title: "Internet Week 2025",
-    items: ["Built the on-site event network"],
-  },
-  {
-    title: "Brand new note",
-    items: ["A blog for network and server engineers"],
-  },
-  {
-    title: "Atelier mano",
+    en: "Interop Tokyo 2017–2019, 2022–2023",
+    ja: "Interop Tokyo 2017-2019, 2022-2023",
     items: [
-      "Focused on AI, video editing, and 3D modeling",
-      "A blog supporting creators",
+      {
+        en: "Exhibited 8K streaming technology over ultra-wideband networks",
+        ja: "超広帯域ネットワークにおける8Kストリーミング技術に関する出展",
+      },
     ],
   },
   {
-    title: "Ran a YouTube channel",
+    en: "Internet Week 2025",
+    ja: "Internet Week 2025",
+    items: [{ en: "Built the on-site event network", ja: "会場向けイベントネットワーク設営" }],
+  },
+  {
+    en: "Brand new note",
+    ja: "Brand new note",
+    items: [{ en: "A blog for network and server engineers", ja: "ネットワーク、サーバ技術者向けブログ" }],
+  },
+  {
+    en: "Atelier mano",
+    ja: "Atelier mano",
     items: [
-      "Earphone reviews (sponsored)",
-      "Automated live streaming server",
-      "Built multi-stream broadcasting infrastructure",
+      { en: "Focused on AI, video editing, and 3D modeling", ja: "AI, 動画編集, 3Dモデリングが中心" },
+      { en: "A blog supporting creators", ja: "クリエイター支援向けブログ" },
     ],
   },
   {
-    title: "Ran a Discord server",
+    en: "Ran a YouTube channel",
+    ja: "Youtubeチャンネル運営",
     items: [
-      "Color Coordination exam study group (free)",
-      "A volunteer community for exam prep and discussing real-world applications of design",
-      "Won a Special Award at ICD 2024",
+      { en: "Earphone reviews (sponsored)", ja: "イヤホンレビュー(PR)" },
+      { en: "Automated live streaming server", ja: "ライブ配信サーバの自動化" },
+      { en: "Built multi-stream broadcasting infrastructure", ja: "多重配信基盤構築" },
+    ],
+  },
+  {
+    en: "Ran a Discord server",
+    ja: "Discordサーバ運営",
+    items: [
+      { en: "Color Coordination exam study group (free)", ja: "色彩検定勉強会(無償)" },
+      {
+        en: "A volunteer community for exam prep and discussing real-world applications of design",
+        ja: "試験対策とデザインの社会実装を議論できる有志コミュニティ",
+      },
+      { en: "Won a Special Award at ICD 2024", ja: "ICD2024にて特別賞受賞" },
     ],
   },
 ];
@@ -60,22 +75,27 @@ const activities = [
 
     <div class="relative max-w-[var(--container-max)] mx-auto px-6 pb-16 pt-24 w-full">
       <p class="text-[var(--color-accent)] font-display text-sm tracking-widest uppercase mb-4">
-        Builder
+        <T en="Builder" ja="ビルダー" />
       </p>
       <h1 class="font-display font-bold text-4xl sm:text-6xl leading-tight max-w-3xl">
-        To the creator who crosses multimedia.
+        <T en="To the creator who crosses multimedia." ja="マルチメディアを横断するクリエイターへ" />
       </h1>
       <p class="mt-6 text-[var(--color-fg-muted)] max-w-xl leading-relaxed">
-        Testing ideas while continuously building small tools and products.
+        <T
+          en="Testing ideas while continuously building small tools and products."
+          ja="アイデアを検証しながら、小さなツールやプロダクトを継続的に作っています。"
+        />
       </p>
     </div>
   </section>
 
   <section class="max-w-[var(--container-max)] mx-auto px-6 pb-24">
     <div class="flex items-baseline justify-between mb-8">
-      <h2 class="font-display font-bold text-2xl">Selected Works</h2>
+      <h2 class="font-display font-bold text-2xl">
+        <T en="Selected Works" ja="主な制作物" />
+      </h2>
       <a href="/works" class="text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors">
-        View all &rarr;
+        <T en="View all →" ja="すべて見る →" />
       </a>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -86,7 +106,9 @@ const activities = [
   </section>
 
   <section class="max-w-[var(--container-max)] mx-auto px-6 pb-24">
-    <h2 class="font-display font-bold text-2xl mb-8">About</h2>
+    <h2 class="font-display font-bold text-2xl mb-8">
+      <T en="About" ja="プロフィール" />
+    </h2>
     <div class="flex flex-col sm:flex-row gap-8 items-start">
       <img
         src="/profile/comai_circle.png"
@@ -95,24 +117,32 @@ const activities = [
       />
       <div class="max-w-2xl">
         <p class="text-[var(--color-fg-muted)] leading-relaxed mb-4">
-          Building products with my own hands is what motivates me most.
+          <T
+            en="Building products with my own hands is what motivates me most."
+            ja="自分で手を動かしてプロダクトを作ることに一番のモチベーションがあります。"
+          />
         </p>
         <p class="text-[var(--color-fg-muted)] leading-relaxed">
-          I researched optical networks and virtualization technology at a
-          university in Japan. Now, I'm also interested in video editing,
-          technical writing, 3D modeling, AI research, and more.
+          <T
+            en="I researched optical networks and virtualization technology at a university in Japan. Now, I'm also interested in video editing, technical writing, 3D modeling, AI research, and more."
+            ja="日本の大学で光ネットワークと仮想化技術を研究していました。現在は動画編集、技術ライティング、3Dモデリング、AI研究など幅広い分野に関心があります。"
+          />
         </p>
 
-        <h3 class="font-display font-medium text-lg mt-10 mb-4">Activities</h3>
+        <h3 class="font-display font-medium text-lg mt-10 mb-4">
+          <T en="Activities" ja="活動実績" />
+        </h3>
         <ul class="flex flex-col gap-3">
           {activities.map((activity) => (
             <li>
-              <p class="text-[var(--color-fg)]">{activity.title}</p>
+              <p class="text-[var(--color-fg)]">
+                <T en={activity.en} ja={activity.ja} />
+              </p>
               {activity.items && (
                 <ul class="mt-1 flex flex-col gap-0.5">
                   {activity.items.map((item) => (
                     <li class="text-sm text-[var(--color-fg-muted)] leading-relaxed pl-4 relative before:content-['–'] before:absolute before:left-0">
-                      {item}
+                      <T en={item.en} ja={item.ja} />
                     </li>
                   ))}
                 </ul>
