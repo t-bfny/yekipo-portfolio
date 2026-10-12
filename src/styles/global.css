@@ -21,10 +21,15 @@
   --container-max: 72rem; /* 1152px */
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-body);
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {

@@ -14,7 +14,8 @@ const links = [
 <header class="border-b border-[var(--color-border)]">
   <div class="max-w-[var(--container-max)] mx-auto flex items-center justify-between px-6 py-5">
     <a href="/" class="font-display font-bold text-lg tracking-tight">yekipo</a>
-    <div class="flex items-center gap-6">
+
+    <div class="hidden sm:flex items-center gap-6">
       <nav class="flex gap-6 text-sm text-[var(--color-fg-muted)]">
         {links.map((link) => (
           <a
@@ -29,34 +30,84 @@ const links = [
         ))}
       </nav>
       <button
-        id="lang-switch"
         type="button"
         aria-label="Switch language"
-        class="text-xs text-[var(--color-fg-muted)] border border-[var(--color-border)] rounded-full px-3 py-1 transition-colors hover:text-[var(--color-fg)] hover:border-[var(--color-accent)]"
+        class="lang-switch text-xs text-[var(--color-fg-muted)] border border-[var(--color-border)] rounded-full px-3 py-1 transition-colors hover:text-[var(--color-fg)] hover:border-[var(--color-accent)]"
       >
         <span lang="en">日本語</span><span lang="ja">EN</span>
       </button>
     </div>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      aria-label="Menu"
+      aria-expanded="false"
+      class="sm:hidden text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors p-1"
+    >
+      <svg id="menu-icon-open" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M2 6h18M2 11h18M2 16h18" stroke-linecap="round" />
+      </svg>
+      <svg id="menu-icon-close" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" hidden>
+        <path d="M4 4l14 14M18 4L4 18" stroke-linecap="round" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" hidden class="sm:hidden border-t border-[var(--color-border)] px-6 py-5 flex flex-col gap-5">
+    <nav class="flex flex-col gap-4 text-sm text-[var(--color-fg-muted)]">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "transition-colors hover:text-[var(--color-fg)]",
+            pathname === link.href && "text-[var(--color-fg)]",
+          ]}
+        >
+          <T en={link.en} ja={link.ja} />
+        </a>
+      ))}
+    </nav>
+    <button
+      type="button"
+      aria-label="Switch language"
+      class="lang-switch self-start text-xs text-[var(--color-fg-muted)] border border-[var(--color-border)] rounded-full px-3 py-1 transition-colors hover:text-[var(--color-fg)] hover:border-[var(--color-accent)]"
+    >
+      <span lang="en">日本語</span><span lang="ja">EN</span>
+    </button>
   </div>
 </header>
 
 <script is:inline>
   (function () {
-    var btn = document.getElementById("lang-switch");
-    if (!btn) return;
-    btn.addEventListener("click", function () {
-      var isJa = document.documentElement.getAttribute("data-lang") === "ja";
-      if (isJa) {
-        document.documentElement.removeAttribute("data-lang");
-        try {
-          localStorage.setItem("lang", "en");
-        } catch (e) {}
-      } else {
-        document.documentElement.setAttribute("data-lang", "ja");
-        try {
-          localStorage.setItem("lang", "ja");
-        } catch (e) {}
-      }
+    document.querySelectorAll(".lang-switch").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var isJa = document.documentElement.getAttribute("data-lang") === "ja";
+        if (isJa) {
+          document.documentElement.removeAttribute("data-lang");
+          try {
+            localStorage.setItem("lang", "en");
+          } catch (e) {}
+        } else {
+          document.documentElement.setAttribute("data-lang", "ja");
+          try {
+            localStorage.setItem("lang", "ja");
+          } catch (e) {}
+        }
+      });
+    });
+
+    var toggle = document.getElementById("menu-toggle");
+    var menu = document.getElementById("mobile-menu");
+    var iconOpen = document.getElementById("menu-icon-open");
+    var iconClose = document.getElementById("menu-icon-close");
+    if (!toggle || !menu) return;
+    toggle.addEventListener("click", function () {
+      var isOpen = !menu.hidden;
+      menu.hidden = isOpen;
+      toggle.setAttribute("aria-expanded", String(!isOpen));
+      iconOpen.hidden = !isOpen;
+      iconClose.hidden = isOpen;
     });
   })();
 </script>
