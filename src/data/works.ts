@@ -41,10 +41,10 @@ export const works: Work[] = [
     slug: "atelier-mano",
     title: "Atelier mano",
     description: {
-      en: "A character-illustration brand — comics and essays published on note, plus a desktop mascot widget.",
-      ja: "キャラクターイラストを中心としたブランド。noteでの漫画・エッセイ連載と、デスクトップマスコットウィジェットを展開。",
+      en: "A note.com blog for creators — AI coverage and self-made app release notes, plus technical explainers spanning software, hardware, and networking.",
+      ja: "クリエイター向けのnoteブログ。AI関連の発信や自作アプリのリリース記事を中心に、ソフトウェア・ハードウェア・ネットワークまで幅広く技術解説を扱っています。",
     },
-    tags: ["Illustration", "Character Design"],
+    tags: ["Blog", "AI"],
     year: "2026",
     link: "https://note.com/mano_prom",
     image: "/works/atelier-mano.png",
