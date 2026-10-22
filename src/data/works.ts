@@ -102,4 +102,17 @@ export const works: Work[] = [
     image: "/works/Part30.png",
     featured: true,
   },
+  {
+    slug: "techo",
+    title: "techo",
+    description: {
+      en: "An unofficial Evernote successor — an account-free, offline-capable note app that runs entirely in your browser. Imports Evernote's .enex exports directly, and notes never leave your device.",
+      ja: "Evernoteの非公式後継。アカウント不要・オフライン対応のブラウザ版メモ帳です。Evernoteの.enexファイルをそのまま取り込めて、メモは端末のブラウザ内にのみ保存されます。",
+    },
+    tags: ["Web", "PWA"],
+    year: "2026",
+    link: "https://github.com/t-bfny/techo",
+    image: "/works/techo.png",
+    featured: true,
+  },
 ];
