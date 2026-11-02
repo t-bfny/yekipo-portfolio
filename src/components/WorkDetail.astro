@@ -1,0 +1,95 @@
+---
+import type { Work } from "../data/works";
+import T from "./T.astro";
+
+interface Props {
+  work: Work;
+  href: string; // このページ自身のパス。子ページへのリンクに使う
+  backHref: string;
+  backLabel: { en: string; ja: string };
+}
+
+const { work, href, backHref, backLabel } = Astro.props;
+---
+
+<section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24">
+  <a
+    href={backHref}
+    class="inline-block text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors mb-8"
+  >
+    &larr; <T en={backLabel.en} ja={backLabel.ja} />
+  </a>
+
+  {work.image ? (
+    <img
+      src={work.image}
+      alt={work.title}
+      class="w-full aspect-video object-cover rounded-lg border border-[var(--color-border)] mb-10"
+    />
+  ) : (
+    // TODO: public/works/{slug}.jpg を用意したら image フィールドに設定してください
+    <div class="w-full aspect-video rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] flex items-center justify-center mb-10">
+      <span class="font-display text-[var(--color-fg-muted)] text-sm">{work.title}</span>
+    </div>
+  )}
+
+  <div class="flex items-baseline justify-between gap-4 mb-4">
+    <h1 class="font-display font-bold text-3xl sm:text-4xl">{work.title}</h1>
+    <span class="text-sm text-[var(--color-fg-muted)] whitespace-nowrap">{work.year}</span>
+  </div>
+
+  <p class="text-[var(--color-fg-muted)] max-w-2xl leading-relaxed mb-6">
+    <T en={work.description.en} ja={work.description.ja} />
+  </p>
+
+  <div class="flex flex-wrap gap-2 mb-10">
+    {work.tags.map((tag) => (
+      <span class="text-xs text-[var(--color-fg-muted)] border border-[var(--color-border)] rounded-full px-2 py-0.5">
+        {tag}
+      </span>
+    ))}
+  </div>
+
+  {work.children && (
+    <div class="grid sm:grid-cols-2 gap-6 mb-10">
+      {work.children.map((child) => (
+        <a
+          href={`${href}/${child.slug}`}
+          class="block border border-[var(--color-border)] rounded-lg overflow-hidden bg-[var(--color-surface)] transition-colors hover:border-[var(--color-accent)]"
+        >
+          <img src={child.image} alt={child.title} class="w-full aspect-video object-cover" />
+          <div class="p-6">
+            <h2 class="font-display font-medium text-lg mb-2">{child.title}</h2>
+            <p class="text-sm text-[var(--color-fg-muted)] leading-relaxed">
+              <T en={child.description.en} ja={child.description.ja} />
+            </p>
+          </div>
+        </a>
+      ))}
+    </div>
+  )}
+
+  {work.gallery && (
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+      {work.gallery.map((item) => (
+        <figure class="border border-[var(--color-border)] rounded-lg overflow-hidden bg-[var(--color-surface)]">
+          <img src={item.src} alt={item.label.en} width="320" height="270" class="w-full h-auto p-2 bg-white" />
+          <figcaption class="text-xs text-center text-[var(--color-fg-muted)] py-2">
+            <T en={item.label.en} ja={item.label.ja} />
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  )}
+
+  {work.link && (
+    <a
+      href={work.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-block text-[var(--color-accent)] hover:underline"
+    >
+      <T en="Visit" ja="サイトを見る" /> &nearr;
+    </a>
+  )}
+</section>

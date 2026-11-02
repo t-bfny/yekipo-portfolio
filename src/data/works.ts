@@ -7,6 +7,7 @@ export type Work = {
   link?: string; // 外部リンク(詳細ページに表示)
   image?: string; // public/ からの絶対パス。未指定ならプレースホルダー表示
   gallery?: { src: string; label: { en: string; ja: string } }[]; // 詳細ページに並べる個別の画像
+  children?: Work[]; // 詳細ページに一覧で並べる子ページ。/works/{slug}/{子のslug} になる
   featured?: boolean;
 };
 
@@ -120,21 +121,55 @@ export const works: Work[] = [
     slug: "line-stamp",
     title: "LINE Stamp",
     description: {
-      en: "An animated LINE stamp set of a cream-colored cat with eight everyday reactions.",
-      ja: "クリーム色の猫が日常のリアクションを伝える、動くLINEスタンプ8個のセット。",
+      en: "Animated LINE stamps, organized by set.",
+      ja: "動くLINEスタンプをセットごとにまとめています。",
     },
     tags: ["LINE", "Animation"],
     year: "2026",
     image: "/works/line-stamp.png",
-    gallery: [
-      { src: "/works/line-stamp/01.png", label: { en: "Hi", ja: "やあ" } },
-      { src: "/works/line-stamp/02.png", label: { en: "Mm-hm", ja: "うんうん" } },
-      { src: "/works/line-stamp/03.png", label: { en: "Thank you", ja: "ありがとう" } },
-      { src: "/works/line-stamp/04.png", label: { en: "Sorry", ja: "ごめんね" } },
-      { src: "/works/line-stamp/05.png", label: { en: "Yay", ja: "わーい" } },
-      { src: "/works/line-stamp/06.png", label: { en: "Sob", ja: "しくしく" } },
-      { src: "/works/line-stamp/07.png", label: { en: "Whoa", ja: "びっくり" } },
-      { src: "/works/line-stamp/08.png", label: { en: "Good night", ja: "おやすみ" } },
+    children: [
+      {
+        slug: "cat-basic",
+        title: "Cream Cat",
+        description: {
+          en: "A cream-colored cat with eight everyday reactions.",
+          ja: "クリーム色の猫が日常のリアクションを伝える8個のセット。",
+        },
+        tags: ["LINE", "Animation"],
+        year: "2026",
+        image: "/works/line-stamp.png",
+        gallery: [
+          { src: "/works/line-stamp/cat-basic/01.png", label: { en: "Hi", ja: "やあ" } },
+          { src: "/works/line-stamp/cat-basic/02.png", label: { en: "Mm-hm", ja: "うんうん" } },
+          { src: "/works/line-stamp/cat-basic/03.png", label: { en: "Thank you", ja: "ありがとう" } },
+          { src: "/works/line-stamp/cat-basic/04.png", label: { en: "Sorry", ja: "ごめんね" } },
+          { src: "/works/line-stamp/cat-basic/05.png", label: { en: "Yay", ja: "わーい" } },
+          { src: "/works/line-stamp/cat-basic/06.png", label: { en: "Sob", ja: "しくしく" } },
+          { src: "/works/line-stamp/cat-basic/07.png", label: { en: "Whoa", ja: "びっくり" } },
+          { src: "/works/line-stamp/cat-basic/08.png", label: { en: "Good night", ja: "おやすみ" } },
+        ],
+      },
+      {
+        slug: "newyear-2027",
+        title: "New Year 2027",
+        description: {
+          en: "New Year greetings for 2027, the Year of the Sheep, from the cat in a sheep hood.",
+          ja: "2027年の干支、未にちなんで羊のフードをかぶった猫の、お正月のあいさつ8個のセット。",
+        },
+        tags: ["LINE", "Animation", "New Year"],
+        year: "2026",
+        image: "/works/line-stamp/newyear-2027/hero.png",
+        gallery: [
+          { src: "/works/line-stamp/newyear-2027/01.png", label: { en: "Happy New Year", ja: "あけおめ" } },
+          { src: "/works/line-stamp/newyear-2027/02.png", label: { en: "Best wishes this year", ja: "今年もよろしく" } },
+          { src: "/works/line-stamp/newyear-2027/03.png", label: { en: "Congratulations", ja: "おめでとう" } },
+          { src: "/works/line-stamp/newyear-2027/04.png", label: { en: "New Year's money, please", ja: "お年玉ちょうだい" } },
+          { src: "/works/line-stamp/newyear-2027/05.png", label: { en: "Yummy", ja: "おいしい" } },
+          { src: "/works/line-stamp/newyear-2027/06.png", label: { en: "Wishing for a good year", ja: "いい年になりますように" } },
+          { src: "/works/line-stamp/newyear-2027/07.png", label: { en: "Lazy New Year", ja: "寝正月" } },
+          { src: "/works/line-stamp/newyear-2027/08.png", label: { en: "I'll do my best", ja: "今年もがんばる" } },
+        ],
+      },
     ],
     featured: true,
   },

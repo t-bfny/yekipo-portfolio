@@ -1,0 +1,25 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import WorkDetail from "../../../components/WorkDetail.astro";
+import { works } from "../../../data/works";
+
+export function getStaticPaths() {
+  return works.flatMap((parent) =>
+    (parent.children ?? []).map((work) => ({
+      params: { slug: parent.slug, child: work.slug },
+      props: { parent, work },
+    })),
+  );
+}
+
+const { parent, work } = Astro.props;
+---
+
+<Layout title={work.title}>
+  <WorkDetail
+    work={work}
+    href={`/works/${parent.slug}/${work.slug}`}
+    backHref={`/works/${parent.slug}`}
+    backLabel={{ en: `Back to ${parent.title}`, ja: `${parent.title}に戻る` }}
+  />
+</Layout>
