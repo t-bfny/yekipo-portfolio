@@ -52,6 +52,19 @@ const { work } = Astro.props;
       ))}
     </div>
 
+    {work.gallery && (
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        {work.gallery.map((item) => (
+          <figure class="border border-[var(--color-border)] rounded-lg overflow-hidden bg-[var(--color-surface)]">
+            <img src={item.src} alt={item.label.en} width="320" height="270" class="w-full h-auto p-2 bg-white" />
+            <figcaption class="text-xs text-center text-[var(--color-fg-muted)] py-2">
+              <T en={item.label.en} ja={item.label.ja} />
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    )}
+
     {work.link && (
       <a
         href={work.link}

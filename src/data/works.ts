@@ -6,6 +6,7 @@ export type Work = {
   year: string;
   link?: string; // 外部リンク(詳細ページに表示)
   image?: string; // public/ からの絶対パス。未指定ならプレースホルダー表示
+  gallery?: { src: string; label: { en: string; ja: string } }[]; // 詳細ページに並べる個別の画像
   featured?: boolean;
 };
 
@@ -113,6 +114,28 @@ export const works: Work[] = [
     year: "2026",
     link: "https://github.com/t-bfny/techo",
     image: "/works/techo.png",
+    featured: true,
+  },
+  {
+    slug: "line-stamp",
+    title: "LINE Stamp",
+    description: {
+      en: "An animated LINE stamp set of a cream-colored cat with eight everyday reactions.",
+      ja: "クリーム色の猫が日常のリアクションを伝える、動くLINEスタンプ8個のセット。",
+    },
+    tags: ["LINE", "Animation"],
+    year: "2026",
+    image: "/works/line-stamp.png",
+    gallery: [
+      { src: "/works/line-stamp/01.png", label: { en: "Hi", ja: "やあ" } },
+      { src: "/works/line-stamp/02.png", label: { en: "Mm-hm", ja: "うんうん" } },
+      { src: "/works/line-stamp/03.png", label: { en: "Thank you", ja: "ありがとう" } },
+      { src: "/works/line-stamp/04.png", label: { en: "Sorry", ja: "ごめんね" } },
+      { src: "/works/line-stamp/05.png", label: { en: "Yay", ja: "わーい" } },
+      { src: "/works/line-stamp/06.png", label: { en: "Sob", ja: "しくしく" } },
+      { src: "/works/line-stamp/07.png", label: { en: "Whoa", ja: "びっくり" } },
+      { src: "/works/line-stamp/08.png", label: { en: "Good night", ja: "おやすみ" } },
+    ],
     featured: true,
   },
 ];
