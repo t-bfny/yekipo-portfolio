@@ -2,128 +2,248 @@
 import Layout from "../layouts/Layout.astro";
 import T from "../components/T.astro";
 
-const services = [
+const MAIL = "manoatelier554@gmail.com";
+
+// 相談メールの本文は3項目だけ。書きやすさを優先する
+const mailto = (subject: string, lines: string[]) =>
+  `mailto:${MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n\n"))}`;
+
+const consultMail = mailto("記事制作の仕組みづくりの相談 / Content system inquiry", [
+  "お名前（会社名） / Name (company):",
+  "ご希望のプラン（ライト・スタンダード・未定） / Plan (Light / Standard / Not sure):",
+  "相談したいこと（今のサイトやブログの状況など、ひとことで大丈夫です） / What you'd like to discuss:",
+]);
+
+const spotMail = mailto("単発のご依頼 / One-off request", [
+  "お名前 / Name:",
+  "ご依頼の内容（動画編集・記事作成など） / What you need (video editing, article, etc.):",
+  "希望納期・ご予算（わかる範囲で） / Deadline and budget (if known):",
+]);
+
+// 料金は「正規 → モニター(先着2件)」の順。モニターは実績掲載と数字公開への協力が条件
+const plans = [
   {
-    title: "Video Editing",
-    titleJa: "動画編集",
-    description: {
-      en: "Editing for YouTube videos, game commentary, and short-form content — cuts, captions, color, and sound.",
-      ja: "YouTube動画やゲーム実況、ショート動画の編集を承ります。カット編集・字幕・カラー調整・音声調整まで対応。",
-    },
-    formEmbedUrl:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeiuV41IrLdma-KBV5lzw-iA-rpMD396vZvfHEarUFkWeVu2w/viewform?embedded=true" as
-        | string
-        | undefined,
-    mailBody: [
-      "お名前 / Name:",
-      "メールアドレス / Email:",
-      "ご依頼の種類 / Type (YouTube動画・ゲーム実況・ショート動画・その他):",
-      "想定尺 / Target length:",
-      "素材の共有方法 / How footage will be shared:",
-      "参考動画・スタイル(任意) / Reference videos or style (optional):",
-      "希望納期 / Desired deadline:",
-      "ご予算(任意) / Budget (optional):",
-      "その他・ご要望 / Additional notes:",
-    ].join("\n"),
+    name: { en: "Light", ja: "ライト" },
+    who: { en: "Freelancers and teams of 1–3", ja: "フリーランス・1〜3人の会社" },
+    price: "130,000",
+    monitor: "70,000",
+    items: [
+      { en: "Keyword plan (5–10 target keywords)", ja: "キーワード設計（狙う語を5〜10個）" },
+      { en: "Style guide built from your existing writing", ja: "これまでの文章から作る文体ガイド" },
+      { en: "SEO checklist for every article", ja: "記事ごとに使うSEOチェックリスト" },
+      { en: "One article written together with you", ja: "記事1本を一緒に作成" },
+      { en: "Step-by-step manual + one online walkthrough", ja: "手順書＋オンラインでの使い方説明1回" },
+    ],
   },
   {
-    title: "Writing",
-    titleJa: "ライティング",
-    description: {
-      en: "Technical articles, blog posts, and documentation, written clearly with the reader in mind.",
-      ja: "技術記事・ブログ・ドキュメントなど、読み手を意識した分かりやすい文章を執筆します。",
-    },
-    formEmbedUrl:
-      "https://docs.google.com/forms/d/e/1FAIpQLSdOBJEnyww-QOWvRoLr5qXmoCb9xdbK4KZIPtj_dwbyMb19xg/viewform?embedded=true" as
-        | string
-        | undefined,
-    mailBody: [
-      "お名前 / Name:",
-      "メールアドレス / Email:",
-      "ご依頼の種類 / Type (技術記事・ブログ・ドキュメント・その他):",
-      "テーマ・タイトル案 / Topic:",
-      "想定文字数 / Target word count:",
-      "想定読者 / Target audience:",
-      "参考資料・リンク(任意) / Reference materials (optional):",
-      "希望納期 / Desired deadline:",
-      "ご予算(任意) / Budget (optional):",
-      "その他・ご要望 / Additional notes:",
-    ].join("\n"),
+    name: { en: "Standard", ja: "スタンダード" },
+    who: { en: "Small businesses and local schools (4–10 people)", ja: "小さな会社・教室など（4〜10人）" },
+    price: "270,000",
+    monitor: "140,000",
+    featured: true,
+    items: [
+      { en: "Everything in Light", ja: "ライトの内容すべて" },
+      { en: "Keyword plan expanded to 15 keywords", ja: "キーワード設計を15個に拡大" },
+      { en: "First three articles", ja: "最初の記事3本" },
+      { en: "One review session a month after launch", ja: "1カ月後の見直し1回" },
+    ],
   },
+];
+
+const steps = [
+  { en: "Email us — consultation is free", ja: "メールでご相談（無料）" },
+  { en: "30-minute online hearing about your business and readers", ja: "オンラインで30分ほどヒアリング（事業内容・読者）" },
+  { en: "Quote and agreement", ja: "お見積り・ご契約" },
+  { en: "We build the system and the first articles", ja: "仕組みと最初の記事を作成" },
+  { en: "Handover — you run it on your own from here", ja: "引き継ぎ。ここから先はご自身で回せます" },
 ];
 ---
 
-<Layout title="Services">
+<Layout
+  title="Services"
+  description="AIで回る記事制作の仕組みづくり。小さな会社・フリーランスが自分で記事を書き続けられる仕組みを作ります。"
+>
   <div class="w-full h-40 sm:h-56 overflow-hidden">
-    <img
-      src="/works/works-hero.png"
-      alt=""
-      class="w-full h-full object-cover"
-    />
+    <img src="/works/works-hero.png" alt="" class="w-full h-full object-cover" />
   </div>
 
-  <section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24">
-    <h1 class="font-display font-bold text-4xl mb-4">
-      <T en="Services" ja="サービス" />
-    </h1>
-    <p class="text-[var(--color-fg-muted)] max-w-xl leading-relaxed mb-4">
-      <T
-        en="Direct booking for video editing and writing work."
-        ja="動画編集・ライティングのご依頼を直接受け付けています。"
-      />
-    </p>
-    <p class="text-sm text-[var(--color-fg-muted)] max-w-xl leading-relaxed mb-12">
-      <T
-        en="After you submit the form, I'll follow up by email to propose a meeting time. For clients outside Japan, everything will be handled by email only."
-        ja="フォーム送信後、打ち合わせの日程をメールにてご提案します。日本国外からのご依頼は、メールのみでの対応となります。"
-      />
-    </p>
+  <section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24 flex flex-col gap-20">
+    <!-- 主役のサービス -->
+    <div>
+      <h1 class="font-display font-bold text-4xl mb-4">
+        <T en="Services" ja="サービス" />
+      </h1>
+      <p class="text-xs tracking-wide uppercase text-[var(--color-accent)] mb-2">
+        <T en="Main service" ja="メインのサービス" />
+      </p>
+      <h2 class="font-display font-bold text-2xl sm:text-3xl mb-4">
+        <T en="An AI-powered content system you can run yourself" ja="AIで回る記事制作の仕組みづくり" />
+      </h2>
+      <p class="text-[var(--color-fg-muted)] max-w-2xl leading-relaxed">
+        <T
+          en="Not article ghostwriting that never ends — I build the system that lets you keep publishing on your own: what to write, how to write it in your voice, and how to check it before it goes out."
+          ja="記事を代わりに書き続けるのではなく、ご自身で記事を出し続けられる仕組みを作ってお渡しします。「何を書くか」「自分らしい文章でどう書くか」「公開前に何を確かめるか」までを、AIを使って回せる形にします。"
+        />
+      </p>
+    </div>
 
-    <div class="grid sm:grid-cols-2 gap-6">
-      {services.map((service) => (
-        <div class="border border-[var(--color-border)] rounded-lg p-6 bg-[var(--color-surface)] flex flex-col gap-6">
-          <div>
-            <h2 class="font-display font-medium text-lg mb-2">
-              <T en={service.title} ja={service.titleJa} />
-            </h2>
-            <p class="text-sm text-[var(--color-fg-muted)] leading-relaxed">
-              <T en={service.description.en} ja={service.description.ja} />
-            </p>
+    <!-- こんな方に -->
+    <div>
+      <h3 class="font-display font-medium text-lg mb-4"><T en="Who it's for" ja="こんな方に" /></h3>
+      <ul class="grid sm:grid-cols-3 gap-4">
+        <li class="border border-[var(--color-border)] rounded-lg p-5 bg-[var(--color-surface)] text-sm leading-relaxed">
+          <T en="You started a blog but couldn't keep it going" ja="ブログを始めたものの、続かなかった" />
+        </li>
+        <li class="border border-[var(--color-border)] rounded-lg p-5 bg-[var(--color-surface)] text-sm leading-relaxed">
+          <T en="You want to use AI for writing but don't know where to start" ja="AIで記事を書きたいが、何から手を付ければいいかわからない" />
+        </li>
+        <li class="border border-[var(--color-border)] rounded-lg p-5 bg-[var(--color-surface)] text-sm leading-relaxed">
+          <T
+            en="You run a local school or shop and want to be found for searches like “[town] piano lessons”"
+            ja="地元の教室やお店で、「地名＋ピアノ教室」のような検索で見つけてもらいたい"
+          />
+        </li>
+      </ul>
+    </div>
+
+    <!-- プランと料金 -->
+    <div>
+      <h3 class="font-display font-medium text-lg mb-2"><T en="Plans and pricing" ja="プランと料金" /></h3>
+      <p class="text-sm text-[var(--color-fg-muted)] mb-6 max-w-2xl leading-relaxed">
+        <T
+          en="Monitor pricing is available to the first two clients who agree to let me publish the project and its results as a case study."
+          ja="モニター価格は先着2件です。事例として、取り組みの内容と数字の掲載にご協力いただける方が対象です。"
+        />
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        {plans.map((plan) => (
+          <div
+            class:list={[
+              "border rounded-lg p-6 bg-[var(--color-surface)] flex flex-col gap-5",
+              plan.featured ? "border-[var(--color-accent)]" : "border-[var(--color-border)]",
+            ]}
+          >
+            <div>
+              <p class="font-display font-bold text-xl"><T en={plan.name.en} ja={plan.name.ja} /></p>
+              <p class="text-sm text-[var(--color-fg-muted)]"><T en={plan.who.en} ja={plan.who.ja} /></p>
+            </div>
+            <div>
+              <p class="text-sm text-[var(--color-fg-muted)]">
+                <T en="Regular" ja="通常" /> <span class="line-through">{plan.price}<T en=" JPY" ja="円" /></span>
+              </p>
+              <p class="font-display font-bold text-3xl text-[var(--color-accent)]">
+                {plan.monitor}<span class="text-base"><T en=" JPY" ja="円" /></span>
+              </p>
+              <p class="text-xs text-[var(--color-fg-muted)]"><T en="Monitor price (first 2 clients)" ja="モニター価格（先着2件）" /></p>
+            </div>
+            <ul class="flex flex-col gap-2 text-sm leading-relaxed">
+              {plan.items.map((item) => (
+                <li class="flex gap-2">
+                  <span class="text-[var(--color-accent)]">—</span>
+                  <T en={item.en} ja={item.ja} />
+                </li>
+              ))}
+            </ul>
           </div>
+        ))}
+      </div>
 
-          <div class="border border-dashed border-[var(--color-border)] rounded-lg p-4">
-            <p class="text-xs text-[var(--color-fg-muted)] tracking-wide uppercase mb-1">
-              <T en="Pricing" ja="料金" />
-            </p>
-            <p class="text-sm text-[var(--color-fg-muted)]">
-              <T
-                en="Under construction — rates will be posted here soon."
-                ja="準備中 — 近日公開予定です。"
-              />
-            </p>
-          </div>
+      <div class="mt-6 border border-dashed border-[var(--color-border)] rounded-lg p-5 text-sm leading-relaxed">
+        <p class="font-medium mb-1"><T en="Option: ongoing writing" ja="オプション：運用代行" /></p>
+        <p class="text-[var(--color-fg-muted)]">
+          <T
+            en="Two articles a month plus a short report — 60,000 JPY / month. For when you'd rather leave the writing to me after setup."
+            ja="月2本の記事作成と簡単なレポートで、月60,000円。仕組みを作ったあと、執筆はお任せしたい場合に。"
+          />
+        </p>
+      </div>
+    </div>
 
-          {service.formEmbedUrl ? (
-            <iframe
-              src={service.formEmbedUrl}
-              class="w-full border border-[var(--color-border)] rounded-lg"
-              height="900"
-              loading="lazy"
-            >
-              Loading…
-            </iframe>
-          ) : (
-            <a
-              href={`mailto:manoatelier554@gmail.com?subject=${encodeURIComponent(
-                `${service.title} Request`
-              )}&body=${encodeURIComponent(service.mailBody)}`}
-              class="text-sm text-[var(--color-accent)] hover:underline"
-            >
-              <T en="Request via Email" ja="メールで依頼する" /> &rarr;
-            </a>
-          )}
+    <!-- 実績 -->
+    <div>
+      <h3 class="font-display font-medium text-lg mb-4"><T en="Proof" ja="実績" /></h3>
+      <a
+        href="/works/atelier-mano"
+        class="flex flex-col sm:flex-row gap-5 border border-[var(--color-border)] rounded-lg p-5 bg-[var(--color-surface)] transition-colors hover:border-[var(--color-accent)]"
+      >
+        <img src="/works/atelier-mano.png" alt="" class="sm:w-56 rounded object-cover" />
+        <div class="text-sm leading-relaxed">
+          <p class="font-display font-medium text-base mb-2">Atelier mano（note）</p>
+          <p class="text-[var(--color-fg-muted)]">
+            <T
+              en="My own note.com blog is run on exactly this system — keyword selection, style guide, SEO checklist, thumbnails, and publishing. You'll get the same setup, adapted to your business."
+              ja="私自身のnoteは、この仕組み（キーワード選び・文体ガイド・SEOチェックリスト・サムネイル作成・公開まで）で運営しています。同じ仕組みを、あなたの事業に合わせて作ります。"
+            />
+          </p>
         </div>
-      ))}
+      </a>
+    </div>
+
+    <!-- 流れ -->
+    <div>
+      <h3 class="font-display font-medium text-lg mb-4"><T en="How it works" ja="ご依頼の流れ" /></h3>
+      <ol class="flex flex-col gap-3">
+        {steps.map((step, i) => (
+          <li class="flex gap-4 items-baseline text-sm leading-relaxed">
+            <span class="font-display font-bold text-[var(--color-accent)] w-6 shrink-0">{i + 1}</span>
+            <T en={step.en} ja={step.ja} />
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <!-- 相談 -->
+    <div class="border border-[var(--color-accent)] rounded-lg p-6 sm:p-8 bg-[var(--color-surface)]">
+      <h3 class="font-display font-bold text-xl mb-2"><T en="Get in touch" ja="まずはご相談ください" /></h3>
+      <p class="text-sm text-[var(--color-fg-muted)] mb-6 leading-relaxed max-w-2xl">
+        <T
+          en="Just three lines are enough. I'll reply by email with a few times for an online hearing. Clients outside Japan are handled by email only."
+          ja="3項目だけのメールで大丈夫です。返信で、オンラインでのヒアリングの日程をご提案します。日本国外からのご依頼は、メールのみでの対応となります。"
+        />
+      </p>
+      <a
+        href={consultMail}
+        class="inline-block font-medium text-[var(--color-bg)] bg-[var(--color-accent)] rounded-full px-6 py-3 hover:opacity-90"
+      >
+        <T en="Email me about it" ja="メールで相談する" />
+      </a>
+      <p class="text-xs text-[var(--color-fg-muted)] mt-4">
+        <T en="If the button doesn't open your mail app:" ja="ボタンでメールが開かない場合：" />
+        <span class="select-all">{MAIL}</span>
+      </p>
+    </div>
+
+    <!-- 単発のご依頼 -->
+    <div>
+      <h3 class="font-display font-medium text-lg mb-2"><T en="One-off requests" ja="単発のご依頼" /></h3>
+      <p class="text-sm text-[var(--color-fg-muted)] mb-6 max-w-2xl leading-relaxed">
+        <T en="I also take individual video editing and writing jobs." ja="動画編集や記事1本単位のご依頼もお受けしています。" />
+      </p>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="border border-[var(--color-border)] rounded-lg p-6 bg-[var(--color-surface)]">
+          <p class="font-display font-medium text-lg mb-2"><T en="Video Editing" ja="動画編集" /></p>
+          <p class="text-sm text-[var(--color-fg-muted)] leading-relaxed mb-3">
+            <T
+              en="YouTube videos, game commentary, and short-form content — cuts, captions, color, and sound."
+              ja="YouTube動画やゲーム実況、ショート動画の編集。カット編集・字幕・カラー調整・音声調整まで対応します。"
+            />
+          </p>
+          <p class="text-sm"><T en="Pricing: quote on request" ja="料金：お見積り" /></p>
+        </div>
+        <div class="border border-[var(--color-border)] rounded-lg p-6 bg-[var(--color-surface)]">
+          <p class="font-display font-medium text-lg mb-2"><T en="Writing" ja="ライティング" /></p>
+          <p class="text-sm text-[var(--color-fg-muted)] leading-relaxed mb-3">
+            <T
+              en="Technical articles, blog posts, and documentation, written clearly with the reader in mind."
+              ja="技術記事・ブログ・ドキュメントなど、読み手を意識した分かりやすい文章を執筆します。"
+            />
+          </p>
+          <p class="text-sm"><T en="Pricing: quote on request" ja="料金：お見積り" /></p>
+        </div>
+      </div>
+      <a href={spotMail} class="inline-block mt-6 text-sm text-[var(--color-accent)] hover:underline">
+        <T en="Request via email" ja="メールで依頼する" /> &rarr;
+      </a>
     </div>
   </section>
 </Layout>
