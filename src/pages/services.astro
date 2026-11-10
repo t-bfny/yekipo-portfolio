@@ -78,38 +78,78 @@ const steps = [
   <section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24 flex flex-col gap-20">
     <!-- 主役のサービス -->
     <div>
-      <h1 class="font-display font-bold text-4xl mb-4">
+      <p class="text-sm font-medium text-[var(--color-fg-muted)] mb-3">
         <T en="Services" ja="サービス" />
-      </h1>
-      <p class="text-xs tracking-wide uppercase text-[var(--color-accent)] mb-2">
-        <T en="Main service" ja="メインのサービス" />
       </p>
-      <h2 class="font-display font-bold text-2xl sm:text-3xl mb-4">
+      <span class="inline-block text-xs font-semibold tracking-wide uppercase text-[var(--color-accent)] bg-[var(--color-accent)]/10 rounded-full px-3 py-1 mb-5">
+        <T en="Main service" ja="メインのサービス" />
+      </span>
+      <h1 class="font-display font-bold text-4xl sm:text-5xl leading-[1.15] mb-6 max-w-3xl">
         <T en="An AI-powered content system you can run yourself" ja="AIで回る記事制作の仕組みづくり" />
-      </h2>
-      <p class="text-[var(--color-fg-muted)] max-w-2xl leading-relaxed">
+      </h1>
+
+      <div class="flex items-center gap-3 mb-6">
+        <img src="/profile/comai_circle.png" alt="" class="w-10 h-10 rounded-full border border-[var(--color-border)]" />
+        <p class="text-sm">
+          <span class="font-medium">yekipo</span>
+          <span class="text-[var(--color-fg-muted)]"> · <T en="Builder & writer" ja="開発・ライティング" /></span>
+        </p>
+      </div>
+
+      <p class="text-[var(--color-fg-muted)] max-w-2xl leading-relaxed mb-8">
         <T
           en="Not article ghostwriting that never ends — I build the system that lets you keep publishing on your own: what to write, how to write it in your voice, and how to check it before it goes out."
           ja="記事を代わりに書き続けるのではなく、ご自身で記事を出し続けられる仕組みを作ってお渡しします。「何を書くか」「自分らしい文章でどう書くか」「公開前に何を確かめるか」までを、AIを使って回せる形にします。"
         />
       </p>
+
+      <a
+        href={consultMail}
+        class="inline-flex items-center gap-2 font-medium text-[var(--color-bg)] bg-[var(--color-accent)] rounded-full px-6 py-3 hover:opacity-90 transition-opacity"
+      >
+        <T en="Get a free consultation" ja="無料相談をはじめる" />
+        <span aria-hidden="true">&rarr;</span>
+      </a>
     </div>
 
     <!-- こんな方に -->
     <div>
       <h3 class="font-display font-medium text-lg mb-4"><T en="Who it's for" ja="こんな方に" /></h3>
-      <ul class="grid sm:grid-cols-3 gap-4">
-        <li class="border border-[var(--color-border)] rounded-lg p-5 bg-[var(--color-surface)] text-sm leading-relaxed">
-          <T en="You started a blog but couldn't keep it going" ja="ブログを始めたものの、続かなかった" />
+      <ul class="grid sm:grid-cols-3 gap-5">
+        <li class="border border-[var(--color-border)] rounded-xl p-6 bg-[var(--color-surface)] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
+          <div class="w-10 h-10 rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center mb-4 text-[var(--color-accent)]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4Z" />
+            </svg>
+          </div>
+          <p class="text-sm leading-relaxed">
+            <T en="You started a blog but couldn't keep it going" ja="ブログを始めたものの、続かなかった" />
+          </p>
         </li>
-        <li class="border border-[var(--color-border)] rounded-lg p-5 bg-[var(--color-surface)] text-sm leading-relaxed">
-          <T en="You want to use AI for writing but don't know where to start" ja="AIで記事を書きたいが、何から手を付ければいいかわからない" />
+        <li class="border border-[var(--color-border)] rounded-xl p-6 bg-[var(--color-surface)] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
+          <div class="w-10 h-10 rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center mb-4 text-[var(--color-accent)]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z" />
+            </svg>
+          </div>
+          <p class="text-sm leading-relaxed">
+            <T en="You want to use AI for writing but don't know where to start" ja="AIで記事を書きたいが、何から手を付ければいいかわからない" />
+          </p>
         </li>
-        <li class="border border-[var(--color-border)] rounded-lg p-5 bg-[var(--color-surface)] text-sm leading-relaxed">
-          <T
-            en="You run a local school or shop and want to be found for searches like “[town] piano lessons”"
-            ja="地元の教室やお店で、「地名＋ピアノ教室」のような検索で見つけてもらいたい"
-          />
+        <li class="border border-[var(--color-border)] rounded-xl p-6 bg-[var(--color-surface)] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
+          <div class="w-10 h-10 rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center mb-4 text-[var(--color-accent)]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </div>
+          <p class="text-sm leading-relaxed">
+            <T
+              en="You run a local school or shop and want to be found for searches like “[town] piano lessons”"
+              ja="地元の教室やお店で、「地名＋ピアノ教室」のような検索で見つけてもらいたい"
+            />
+          </p>
         </li>
       </ul>
     </div>
