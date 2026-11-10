@@ -1,8 +1,14 @@
 ---
 import T from "./T.astro";
 
+// mailto: はメールクライアント未設定のブラウザだと何も起きないため、Gmailの作成画面を直接開くリンクにする
 const links = [
-  { href: "mailto:manoatelier554@gmail.com", en: "Email", ja: "Email" },
+  {
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=manoatelier554@gmail.com",
+    en: "Email",
+    ja: "Email",
+    external: true,
+  },
   { href: "https://github.com/t-bfny", en: "GitHub", ja: "GitHub" },
   { href: "https://x.com/yekiponk", en: "X", ja: "X" },
   { href: "/privacy", en: "Privacy", ja: "プライバシーポリシー" },
@@ -17,7 +23,12 @@ const links = [
     </span>
     <div class="flex gap-6 sm:pr-28">
       {links.map((link) => (
-        <a href={link.href} class="transition-colors hover:text-[var(--color-fg)]">
+        <a
+          href={link.href}
+          target={link.external ? "_blank" : undefined}
+          rel={link.external ? "noopener noreferrer" : undefined}
+          class="transition-colors hover:text-[var(--color-fg)]"
+        >
           <T en={link.en} ja={link.ja} />
         </a>
       ))}

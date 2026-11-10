@@ -5,8 +5,9 @@ import T from "../components/T.astro";
 const MAIL = "manoatelier554@gmail.com";
 
 // 相談メールの本文は3項目だけ。書きやすさを優先する
+// mailto: はメールクライアント未設定のブラウザだと何も起きないため、Gmailの作成画面を直接開くリンクにする
 const mailto = (subject: string, lines: string[]) =>
-  `mailto:${MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n\n"))}`;
+  `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(MAIL)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n\n"))}`;
 
 const consultMail = mailto("記事制作の仕組みづくりの相談 / Content system inquiry", [
   "お名前（会社名） / Name (company):",
@@ -105,6 +106,8 @@ const steps = [
 
       <a
         href={consultMail}
+        target="_blank"
+        rel="noopener noreferrer"
         class="inline-flex items-center gap-2 font-medium text-[var(--color-bg)] bg-[var(--color-accent)] rounded-full px-6 py-3 hover:opacity-90 transition-opacity"
       >
         <T en="Get a free consultation" ja="無料相談をはじめる" />
@@ -251,12 +254,14 @@ const steps = [
       </p>
       <a
         href={consultMail}
+        target="_blank"
+        rel="noopener noreferrer"
         class="inline-block font-medium text-[var(--color-bg)] bg-[var(--color-accent)] rounded-full px-6 py-3 hover:opacity-90"
       >
         <T en="Email me about it" ja="メールで相談する" />
       </a>
       <p class="text-xs text-[var(--color-fg-muted)] mt-4">
-        <T en="If the button doesn't open your mail app:" ja="ボタンでメールが開かない場合：" />
+        <T en="If the button doesn't work for you:" ja="ボタンがうまく開かない場合：" />
         <span class="select-all">{MAIL}</span>
       </p>
     </div>
@@ -289,7 +294,12 @@ const steps = [
           <p class="text-sm"><T en="Pricing: quote on request" ja="料金：お見積り" /></p>
         </div>
       </div>
-      <a href={spotMail} class="inline-block mt-6 text-sm text-[var(--color-accent)] hover:underline">
+      <a
+        href={spotMail}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block mt-6 text-sm text-[var(--color-accent)] hover:underline"
+      >
         <T en="Request via email" ja="メールで依頼する" /> &rarr;
       </a>
     </div>
