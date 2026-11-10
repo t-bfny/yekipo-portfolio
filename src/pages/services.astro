@@ -62,9 +62,11 @@ const steps = [
 <Layout
   title="Services"
   description="AIで回る記事制作の仕組みづくり。小さな会社・フリーランスが自分で記事を書き続けられる仕組みを作ります。"
+  accent="#ffb84c"
 >
-  <div class="w-full h-40 sm:h-56 overflow-hidden">
+  <div class="relative w-full h-40 sm:h-56 overflow-hidden">
     <img src="/works/works-hero.png" alt="" class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-[var(--color-bg)]/55"></div>
   </div>
 
   <section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24 flex flex-col gap-20">
@@ -148,7 +150,7 @@ const steps = [
         ))}
       </div>
 
-      <div class="mt-6 border border-dashed border-[var(--color-border)] rounded-lg p-5 text-sm leading-relaxed">
+      <div class="mt-6 border border-[var(--color-border)] rounded-lg p-5 text-sm leading-relaxed">
         <p class="font-medium mb-1"><T en="Option: ongoing writing" ja="オプション：運用代行" /></p>
         <p class="text-[var(--color-fg-muted)]">
           <T
