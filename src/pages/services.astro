@@ -62,11 +62,17 @@ const steps = [
 <Layout
   title="Services"
   description="AIで回る記事制作の仕組みづくり。小さな会社・フリーランスが自分で記事を書き続けられる仕組みを作ります。"
-  accent="#ffb84c"
+  theme={{
+    bg: "#f7f3ec",
+    surface: "#ffffff",
+    border: "#e6ded0",
+    fg: "#221d16",
+    fgMuted: "#766d5c",
+    accent: "#b45309",
+  }}
 >
   <div class="relative w-full h-40 sm:h-56 overflow-hidden">
-    <img src="/works/works-hero.png" alt="" class="w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-[var(--color-bg)]/55"></div>
+    <img src="/works/works-hero-light.png" alt="" class="w-full h-full object-cover" />
   </div>
 
   <section class="max-w-[var(--container-max)] mx-auto px-6 pt-16 pb-24 flex flex-col gap-20">

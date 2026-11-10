@@ -4,16 +4,41 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import T from "../components/T.astro";
 
+interface PageTheme {
+  bg?: string;
+  surface?: string;
+  border?: string;
+  fg?: string;
+  fgMuted?: string;
+  accent?: string;
+}
+
 interface Props {
   title: string;
   description?: string;
-  accent?: string; // ページ固有のアクセントカラー(未指定ならグローバルの --color-accent を使用)
+  accent?: string; // 単色だけ変えたい場合の簡易指定(theme.accentと同じ)
+  theme?: PageTheme; // ページ全体の配色を上書きしたい場合(背景も含む)
 }
 
-const { title, description = "Enhance your creativity.", accent } = Astro.props;
+const { title, description = "Enhance your creativity.", accent, theme } = Astro.props;
 const pageTitle = `${title} | yekipo`;
 const ogImage = new URL("/works/works-hero.png", Astro.site ?? "https://yekipo.tech").href;
 const pageUrl = new URL(Astro.url.pathname, Astro.site ?? "https://yekipo.tech").href;
+
+const resolvedTheme: PageTheme = { accent, ...theme };
+const varMap: Record<keyof PageTheme, string> = {
+  bg: "--color-bg",
+  surface: "--color-surface",
+  border: "--color-border",
+  fg: "--color-fg",
+  fgMuted: "--color-fg-muted",
+  accent: "--color-accent",
+};
+const bodyStyle =
+  (Object.keys(varMap) as (keyof PageTheme)[])
+    .filter((key) => resolvedTheme[key])
+    .map((key) => `${varMap[key]}: ${resolvedTheme[key]}`)
+    .join("; ") || undefined;
 ---
 
 <!doctype html>
@@ -50,7 +75,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site ?? "https://yekipo.tech")
       })();
     </script>
   </head>
-  <body style={accent ? `--color-accent: ${accent}` : undefined}>
+  <body style={bodyStyle}>
     <Header />
     <main>
       <slot />
