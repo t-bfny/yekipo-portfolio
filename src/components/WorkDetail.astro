@@ -73,7 +73,10 @@ const { work, href, backHref, backLabel } = Astro.props;
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
       {work.gallery.map((item) => (
         <figure class="border border-[var(--color-border)] rounded-lg overflow-hidden bg-[var(--color-surface)]">
-          <img src={item.src} alt={item.label.en} width="320" height="270" class="w-full h-auto p-2 bg-white" />
+          <div class="relative select-none" data-protect style="-webkit-touch-callout: none;">
+            <img src={item.src} alt={item.label.en} width="320" height="270" draggable="false" class="w-full h-auto p-2 bg-white" />
+            <div class="absolute inset-0" aria-hidden="true"></div>
+          </div>
           <figcaption class="text-xs text-center text-[var(--color-fg-muted)] py-2">
             <T en={item.label.en} ja={item.label.ja} />
           </figcaption>
@@ -93,3 +96,13 @@ const { work, href, backHref, backLabel } = Astro.props;
     </a>
   )}
 </section>
+
+<script>
+  // スタンプ画像の右クリックメニューとドラッグ保存を止める(軽い抑止)
+  document.addEventListener("contextmenu", (e) => {
+    if (e.target instanceof Element && e.target.closest("[data-protect]")) e.preventDefault();
+  });
+  document.addEventListener("dragstart", (e) => {
+    if (e.target instanceof Element && e.target.closest("[data-protect]")) e.preventDefault();
+  });
+</script>
